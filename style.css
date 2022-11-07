@@ -5,18 +5,23 @@
 }
 
 body {
-    background: url(images/pattern-hills.svg), url(images/bg-stars.svg);
-    background-color: hsl(235, 16%, 14%);
-    background-repeat: no-repeat;
-    background-position: bottom right -130px, center;
+  background: url(images/pattern-hills.svg), url(images/bg-stars.svg);
+  background-color: hsl(235, 16%, 14%);
+  background-repeat: no-repeat;
+  background-position: bottom right -130px, center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .wrapper {
-    height: 100vh;
+    height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
+    margin-top: 140px;
 }
 
 .title h1 {
@@ -31,13 +36,232 @@ body {
     margin-right: 30px;
 }
 
+.links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
 .links img {
     width: 24px;
     margin: 12px;
-    transition: 0.2s;
+    transition: 0.1s;
 }
 
 .links img:hover {
 cursor: pointer;
 filter: invert(50%) sepia(52%) saturate(1834%) hue-rotate(312deg) brightness(101%) contrast(97%);
 }
+
+
+
+
+
+
+
+
+
+.flip-clock {
+  text-align: center;
+  margin: 20px auto;
+  margin-top: -270px;
+}
+
+*,
+*:before,
+*:after { box-sizing: border-box; }
+
+.flip-clock__piece {
+  display: inline-block;
+  margin: 0 8px;
+}
+
+.flip-clock__slot {
+  font-size: 7px;
+  font-weight: 700;
+  line-height: 9px;
+  letter-spacing: 3px;
+  text-align: center;
+  color: #8385A9;
+  text-transform: uppercase;
+}
+
+@halfHeight: 0.72em;
+@borderRadius: 0.15em;
+
+.card {
+  display: block;
+  position: relative; 
+  padding-bottom: 0.72em;
+  line-height: 0.95;
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.card__top,
+.card__bottom,
+.card__back::before,
+.card__back::after {
+  display: block;
+  height: 25px;
+  color: #FB5E84;
+  background: hsl(237, 21%, 21%);
+  padding: 0.25em 0.25em;
+  border-radius: 0.15em 0.15em 0 0;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  width: 71px;
+  transform: translateZ(0);
+}
+
+.card__bottom { 
+  color: #ff7094;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  border-top: solid 1px #000;
+  background: hsl(236, 21%, 26%); 
+  border-radius: 0 0 0.15em 0.15em; 
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.card__bottom::after {
+  display: block;
+  margin-top: -0.72em;
+}
+
+.card__back::before,
+.card__bottom::after {
+  content: attr(data-value);
+}
+
+.card__back {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  left: 0%;
+  pointer-events: none;
+}
+
+.card__back::before {
+  position: relative;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.flip .card__back::before {
+  animation: flipTop 0.3s cubic-bezier(.37,.01,.94,.35);
+  animation-fill-mode: both;
+  transform-origin: center bottom;
+}
+
+.flip .card__back .card__bottom {
+  transform-origin: center top;
+  animation-fill-mode: both;
+  animation: flipBottom 0.6s cubic-bezier(.15,.45,.28,1), 0.3s; 
+}
+
+@keyframes flipTop {
+  0% {
+    transform: rotateX(0deg);
+    z-index: 2;
+  }
+  0%, 99% {
+    opacity: 0.99;
+  }
+  100% {
+    transform: rotateX(-90deg);
+    opacity: 0;
+  }
+}
+
+@keyframes flipBottom {
+  0%, 50% {
+    z-index: -1;
+    transform: rotateX(90deg);
+    opacity: 0;
+  }
+  51% {
+    opacity: 0.99;
+  }
+  100% {
+    opacity: 0.99;
+    transform: rotateX(0deg);
+    z-index: 5;
+  }
+}
+
+
+
+@media only screen and (min-width: 730px) {
+
+  body {
+    background-position: bottom, center;
+    background-size: contain, auto;
+  }
+
+  .flip-clock {
+    margin-top: -70px;
+  }
+
+  .title h1 {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 29px;
+    letter-spacing: 7.5px;
+    text-align: center; 
+  }
+
+  .links {
+    margin-bottom: 50px;
+  }
+
+
+
+  .card {
+    font-size: 80px;
+    line-height: 71px;
+    letter-spacing: -2.5px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 10px #00000063;
+  }
+
+  .flip-clock__slot {
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: 6px;
+    margin-top: 24px;
+  }
+
+  .flip-clock__piece {
+    margin: 0 16px;
+  }
+
+  .card__top,
+  .card__bottom,
+  .card__back::before,
+  .card__back::after {
+    height: 57px;
+    width: 147px;
+  }
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
